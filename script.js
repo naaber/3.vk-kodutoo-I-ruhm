@@ -22,7 +22,7 @@ var getNews = function(){
 var printNews = function(ajaxArticles){
 	var items = '';
 	$.each(ajaxArticles, function(index, article){
-		items += '<div class="item">' + article + '</div>';
+		items += '<div class="item">' + article.replace(/\"/g, "") + '</div>';
 	});
 	var temp = $(items);
   $grid.prepend(temp)

@@ -23,14 +23,17 @@
 		$xpath = new DOMXPath($doc);
 		$query = "//div[@class='Text11px']";
 		$entries = $xpath->query($query);
-		$var = $entries->item(0)->textContent;
-		/* ...SIIANI kasutasin: http://stackoverflow.com/questions/20446598/get-div-content-from-external-website */
+		$var1 = $entries->item(0)->textContent;
+		$var2 = str_replace(array("\n", "\t"), '', $var1);
+		$var3 = str_replace("\r", ' ', $var2);
+
+		/* ...SIIANI kasutasin suures osas: http://stackoverflow.com/questions/20446598/get-div-content-from-external-website */
 		
-		array_push($obj->articles, json_encode($var));
+		array_push($obj->articles, json_encode($var3, JSON_UNESCAPED_UNICODE));
 	}
 	
-	file_put_contents($file_name, json_encode($obj));
-	echo json_encode($obj);
+	file_put_contents($file_name, json_encode($obj, JSON_UNESCAPED_UNICODE));
+	echo json_encode($obj, JSON_UNESCAPED_UNICODE);
 
 	//echo $data_json;
 ?>
